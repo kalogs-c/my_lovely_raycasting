@@ -1,3 +1,6 @@
+require("vector")
+require("player")
+
 GameMap = {
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 	{ 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
@@ -11,14 +14,14 @@ GameMap = {
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 }
 
-Player = {}
-
-function Player:load()
-	self.position = { x = 5, y = 5 }
-	self.direction = { x = 0, y = -1 }
+function CalculatePlaneModifier(pixelX)
+	return 2 * (pixelX / love.graphics.getWidth()) - 1
 end
 
+Plane = Vector.new(0.66, 0)
+
 function love.load()
+	Player:load()
 	love.graphics.setBackgroundColor(190, 190, 255)
 end
 
@@ -31,4 +34,15 @@ function love.draw()
 		love.graphics.getWidth(),
 		love.graphics.getHeight() / 2
 	)
+end
+
+function love.update(dt)
+	for pixel = 0, love.graphics.getWidth() do
+		local planeModifier = CalculatePlaneModifier(pixel)
+		local cameraPixel = Vector.multiply(Player.direction, planeModifier)
+		local rayDirection = Vector.sum_vectors(Player.position, cameraPixel)
+		print(planeModifier)
+		print(cameraPixel.x, cameraPixel.y, pixel)
+		print(rayDirection.x, rayDirection.y, pixel)
+	end
 end
