@@ -41,8 +41,12 @@ function love.update(dt)
 		local planeModifier = CalculatePlaneModifier(pixel)
 		local cameraPixel = Vector.multiply(Player.direction, planeModifier)
 		local rayDirection = Vector.sum_vectors(Player.position, cameraPixel)
+
+		local deltaDistance =
+			Vector.new(Vector.magnitude(rayDirection) / rayDirection.x, Vector.magnitude(rayDirection) / rayDirection.y)
 		print(planeModifier)
 		print(cameraPixel.x, cameraPixel.y, pixel)
 		print(rayDirection.x, rayDirection.y, pixel)
+		print(deltaDistance.x, deltaDistance.y)
 	end
 end
