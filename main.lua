@@ -45,9 +45,12 @@ function love.update(dt)
 		local rayDirMag = Vector.magnitude(rayDirection)
 		local deltaDistance = Vector.new(rayDirMag / rayDirection.x, rayDirMag / rayDirection.y)
 
+		local mapPosition = Vector.new(math.floor(Player.position.x), math.floor(Player.position.y))
+
 		print(planeModifier)
 		print(cameraPixel.x, cameraPixel.y, pixel)
 		print(rayDirection.x, rayDirection.y, pixel)
 		print(deltaDistance.x, deltaDistance.y)
+		print(mapPosition.x, mapPosition.y)
 	end
 end
